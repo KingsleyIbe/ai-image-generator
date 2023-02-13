@@ -20,11 +20,12 @@ const CreatePost = () => {
   };
 
   const handleChange = (e) => {
-
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSurpriseMe = () => {
-
+    const randomPrompt = getRandomPrompt(form.prompt);
+    setForm({ ...form, prompt: randomPrompt });
   };
 
   const generateImg = () => {
@@ -56,7 +57,7 @@ const CreatePost = () => {
             type="text"
             name="prompt"
             value={form.prompt}
-            placeholder="Prompt"
+            placeholder="A Space Shuttle flying above Cape Town, digital art"
             handleChange={handleChange}
             isSurpriseMe
             handleSurpriseMe={handleSurpriseMe}
