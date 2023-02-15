@@ -15,8 +15,31 @@ const CreatePost = () => {
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    if (form.photo && form.prompt) {
+      setLoading(true);
+
+      try {
+        const response = await fetch('http://localhost:8080/api/v1/post', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(form),
+        });
+        await response.json();
+
+        navigate('/');
+      } catch (error) {
+        alert(error);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      alert('Please enter a prompt and generate an image');
+    }
   };
 
   const handleChange = (e) => {
@@ -106,7 +129,7 @@ const CreatePost = () => {
         <div className="mt-10">
           <p className="mt-2 text-[#666e75] text-14px">Once you have created the image, you can share them with the community</p>
           <button type="submit" className="mt-3 text-white bg-[#6469ff] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center">
-            {loading ? 'Sharing' : 'Share with the community'}
+            {loading ? 'Sharing...' : 'Share with the community'}
           </button>
         </div>
       </form>
