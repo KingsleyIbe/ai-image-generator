@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { Card, FormField, Loader } from '../components';
@@ -11,7 +13,7 @@ const RenderCards = ({ data, title }) => {
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
-  const [allPosts, setAllPosts] = useState(null);
+  const [allPosts, setAllPosts] = useState();
   const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
@@ -69,7 +71,7 @@ const Home = () => {
         )}
         <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">
           {searchText ? (
-            <RenderCards data={[]} title="No search results found" />
+            <RenderCards data={allPosts} title="No search results found" />
           ) : (
             <RenderCards data={allPosts} title="No post found" />
 
