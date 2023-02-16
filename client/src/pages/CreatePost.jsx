@@ -18,7 +18,7 @@ const CreatePost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (form.photo && form.prompt) {
+    if (form.prompt && form.photo) {
       setLoading(true);
 
       try {
@@ -29,8 +29,8 @@ const CreatePost = () => {
           },
           body: JSON.stringify(form),
         });
-        await response.json();
 
+        await response.json();
         navigate('/');
       } catch (error) {
         alert(error);
