@@ -25,7 +25,7 @@ const Home = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true);
-      console.log('new');
+      // console.log('new');
 
       try {
         const response = await fetch('http://localhost:8080/api/v1/post', {
@@ -38,6 +38,7 @@ const Home = () => {
         if (response.ok) {
           const result = await response.json();
           console.log(response, result);
+          console.log('fetchpost executed');
 
           setAllPosts(result.data.reverse());
         }
